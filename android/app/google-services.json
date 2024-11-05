@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "34952363162",
+    "project_id": "veri-feed-s82b5u",
+    "storage_bucket": "veri-feed-s82b5u.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34952363162:android:651d93c330daad4dbdb323",
+        "android_client_info": {
+          "package_name": "com.anthonytoyco.verifeed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9OwoY2zdTm3ncC3kbuYXh-Y_HWTHBiV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
