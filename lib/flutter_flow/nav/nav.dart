@@ -74,18 +74,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const AuthPageWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const AuthsWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const AuthPageWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const AuthsWidget(),
         ),
         FFRoute(
-          name: 'AuthPage',
-          path: '/authPage',
-          builder: (context, params) => const AuthPageWidget(),
+          name: 'Auths',
+          path: '/auths',
+          builder: (context, params) => const AuthsWidget(),
         ),
         FFRoute(
           name: 'Feed',
@@ -94,18 +94,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               params.isEmpty ? const NavBarPage(initialPage: 'Feed') : const FeedWidget(),
         ),
         FFRoute(
-          name: 'ProfilePage',
-          path: '/profilePage',
+          name: 'Profile',
+          path: '/profile',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'ProfilePage')
-              : const ProfilePageWidget(),
-        ),
-        FFRoute(
-          name: 'CreatePost',
-          path: '/createPost',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'CreatePost')
-              : const CreatePostWidget(),
+              ? const NavBarPage(initialPage: 'Profile')
+              : const ProfileWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -276,7 +269,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/authPage';
+            return '/auths';
           }
           return null;
         },

@@ -134,8 +134,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Feed': const FeedWidget(),
-      'CreatePost': const CreatePostWidget(),
-      'ProfilePage': const ProfilePageWidget(),
+      'Profile': const ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -162,11 +161,6 @@ class _NavBarPageState extends State<NavBarPage> {
           GButton(
             icon: Icons.home,
             text: 'Feed',
-            iconSize: 24.0,
-          ),
-          GButton(
-            icon: Icons.add_box,
-            text: 'Post',
             iconSize: 24.0,
           ),
           GButton(

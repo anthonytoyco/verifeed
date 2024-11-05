@@ -1,25 +1,25 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'profile_page_model.dart';
-export 'profile_page_model.dart';
+import 'profile_model.dart';
+export 'profile_model.dart';
 
-class ProfilePageWidget extends StatefulWidget {
-  const ProfilePageWidget({super.key});
+class ProfileWidget extends StatefulWidget {
+  const ProfileWidget({super.key});
 
   @override
-  State<ProfilePageWidget> createState() => _ProfilePageWidgetState();
+  State<ProfileWidget> createState() => _ProfileWidgetState();
 }
 
-class _ProfilePageWidgetState extends State<ProfilePageWidget> {
-  late ProfilePageModel _model;
+class _ProfileWidgetState extends State<ProfileWidget> {
+  late ProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProfilePageModel());
+    _model = createModel(context, () => ProfileModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }

@@ -5,26 +5,26 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'auth_page_model.dart';
-export 'auth_page_model.dart';
+import 'auths_model.dart';
+export 'auths_model.dart';
 
-class AuthPageWidget extends StatefulWidget {
-  const AuthPageWidget({super.key});
+class AuthsWidget extends StatefulWidget {
+  const AuthsWidget({super.key});
 
   @override
-  State<AuthPageWidget> createState() => _AuthPageWidgetState();
+  State<AuthsWidget> createState() => _AuthsWidgetState();
 }
 
-class _AuthPageWidgetState extends State<AuthPageWidget>
+class _AuthsWidgetState extends State<AuthsWidget>
     with TickerProviderStateMixin {
-  late AuthPageModel _model;
+  late AuthsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AuthPageModel());
+    _model = createModel(context, () => AuthsModel());
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -182,7 +182,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               isDense: true,
-                                              labelText: 'Username',
+                                              labelText: 'Email',
                                               labelStyle: FlutterFlowTheme.of(
                                                       context)
                                                   .titleLarge
@@ -409,7 +409,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                             context.goNamedAuth(
                                                 'Feed', context.mounted);
                                           },
-                                          text: 'Sign In',
+                                          text: 'Log In',
                                           options: FFButtonOptions(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *

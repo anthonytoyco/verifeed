@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'auth_page_widget.dart' show AuthPageWidget;
+import 'auths_widget.dart' show AuthsWidget;
 import 'package:flutter/material.dart';
 
-class AuthPageModel extends FlutterFlowModel<AuthPageWidget> {
+class AuthsModel extends FlutterFlowModel<AuthsWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TabBar widget.
