@@ -5,6 +5,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'auths_model.dart';
 export 'auths_model.dart';
 
@@ -65,7 +68,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Row(
@@ -75,28 +78,41 @@ class _AuthsWidgetState extends State<AuthsWidget>
                 flex: 3,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
-                      child: Container(
-                        width: 300.0,
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Text(
-                          'VeriFeed',
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context)
-                              .displayLarge
-                              .override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
+                    Expanded(
+                      child: Align(
+                        alignment: const AlignmentDirectional(0.0, 1.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 7.0, 0.0),
+                            child: GradientText(
+                              'VeriFeed',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .displayLarge
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                              colors: [
+                                FlutterFlowTheme.of(context).primary,
+                                FlutterFlowTheme.of(context).secondary,
+                                FlutterFlowTheme.of(context).tertiary
+                              ],
+                              gradientDirection: GradientDirection.ltr,
+                              gradientType: GradientType.linear,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -111,8 +127,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                           maxWidth: 800.0,
                         ),
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                         ),
                         child: Column(
                           children: [
@@ -162,7 +177,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                     children: [
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 32.0, 0.0, 0.0),
+                                            16.0, 32.0, 16.0, 0.0),
                                         child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -179,13 +194,15 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                               () => safeSetState(() {}),
                                             ),
                                             autofocus: false,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               isDense: true,
                                               labelText: 'Email',
                                               labelStyle: FlutterFlowTheme.of(
                                                       context)
-                                                  .titleLarge
+                                                  .titleMedium
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: FlutterFlowTheme.of(
@@ -257,11 +274,11 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                                   : null,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .titleLarge
+                                                .titleMedium
                                                 .override(
                                                   fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.normal,
                                                   lineHeight: 2.0,
                                                 ),
                                             textAlign: TextAlign.start,
@@ -276,7 +293,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                       ),
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 32.0, 0.0, 0.0),
+                                            16.0, 32.0, 16.0, 0.0),
                                         child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -287,6 +304,8 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             focusNode: _model
                                                 .liPasswordTextFieldFocusNode,
                                             autofocus: false,
+                                            textInputAction:
+                                                TextInputAction.done,
                                             obscureText: !_model
                                                 .liPasswordTextFieldVisibility,
                                             decoration: InputDecoration(
@@ -294,7 +313,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                               labelText: 'Password',
                                               labelStyle: FlutterFlowTheme.of(
                                                       context)
-                                                  .titleLarge
+                                                  .titleMedium
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: FlutterFlowTheme.of(
@@ -367,11 +386,11 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .titleLarge
+                                                .titleMedium
                                                 .override(
                                                   fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.normal,
                                                   lineHeight: 2.0,
                                                 ),
                                             textAlign: TextAlign.start,
@@ -381,6 +400,10 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             validator: _model
                                                 .liPasswordTextFieldTextControllerValidator
                                                 .asValidator(context),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp('[a-zA-Z0-9]'))
+                                            ],
                                           ),
                                         ),
                                       ),
@@ -411,9 +434,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                           },
                                           text: 'Log In',
                                           options: FFButtonOptions(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.5,
+                                            width: 250.0,
                                             height: 50.0,
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
@@ -436,6 +457,188 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                           ),
                                         ),
                                       ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 16.0, 0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            if (_model
+                                                .liEmailTextFieldTextController
+                                                .text
+                                                .isEmpty) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                    'Email required!',
+                                                  ),
+                                                ),
+                                              );
+                                              return;
+                                            }
+                                            await authManager.resetPassword(
+                                              email: _model
+                                                  .liEmailTextFieldTextController
+                                                  .text,
+                                              context: context,
+                                            );
+                                          },
+                                          text: 'Forgot Password?',
+                                          options: FFButtonOptions(
+                                            height: 50.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: Colors.transparent,
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .titleSmall
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                            elevation: 0.0,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  50.0, 0.0, 50.0, 0.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Opacity(
+                                                opacity: 0.5,
+                                                child: Divider(
+                                                  height: 64.0,
+                                                  thickness: 2.0,
+                                                  indent: 50.0,
+                                                  endIndent: 50.0,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 16.0, 0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
+                                            final user = await authManager
+                                                .signInWithGoogle(context);
+                                            if (user == null) {
+                                              return;
+                                            }
+
+                                            context.goNamedAuth(
+                                                'Feed', context.mounted);
+                                          },
+                                          text: 'Google',
+                                          icon: const FaIcon(
+                                            FontAwesomeIcons.google,
+                                            size: 20.0,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: 250.0,
+                                            height: 50.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconAlignment: IconAlignment.start,
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLarge
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 0.0,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 16.0, 0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
+                                            final user = await authManager
+                                                .signInAnonymously(context);
+                                            if (user == null) {
+                                              return;
+                                            }
+
+                                            context.goNamedAuth(
+                                                'Feed', context.mounted);
+                                          },
+                                          text: 'Guest',
+                                          icon: const Icon(
+                                            Icons.person,
+                                            size: 25.0,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: 250.0,
+                                            height: 50.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLarge
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 0.0,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Column(
@@ -443,7 +646,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                     children: [
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 32.0, 0.0, 0.0),
+                                            16.0, 32.0, 16.0, 0.0),
                                         child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -460,13 +663,15 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                               () => safeSetState(() {}),
                                             ),
                                             autofocus: false,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               isDense: true,
                                               labelText: 'Email',
                                               labelStyle: FlutterFlowTheme.of(
                                                       context)
-                                                  .titleLarge
+                                                  .titleMedium
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: FlutterFlowTheme.of(
@@ -538,11 +743,11 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                                   : null,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .titleLarge
+                                                .titleMedium
                                                 .override(
                                                   fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.normal,
                                                   lineHeight: 2.0,
                                                 ),
                                             textAlign: TextAlign.start,
@@ -557,7 +762,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                       ),
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 32.0, 0.0, 0.0),
+                                            16.0, 32.0, 16.0, 0.0),
                                         child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -574,13 +779,15 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                               () => safeSetState(() {}),
                                             ),
                                             autofocus: false,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               isDense: true,
                                               labelText: 'Username',
                                               labelStyle: FlutterFlowTheme.of(
                                                       context)
-                                                  .titleLarge
+                                                  .titleMedium
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: FlutterFlowTheme.of(
@@ -652,11 +859,11 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                                   : null,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .titleLarge
+                                                .titleMedium
                                                 .override(
                                                   fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.normal,
                                                   lineHeight: 2.0,
                                                 ),
                                             textAlign: TextAlign.start,
@@ -666,12 +873,16 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             validator: _model
                                                 .suUsernameTextFieldTextControllerValidator
                                                 .asValidator(context),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp('[a-zA-Z0-9]'))
+                                            ],
                                           ),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 32.0, 0.0, 0.0),
+                                            16.0, 32.0, 16.0, 0.0),
                                         child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -682,6 +893,8 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             focusNode: _model
                                                 .suPasswordTextFieldFocusNode,
                                             autofocus: false,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             obscureText: !_model
                                                 .suPasswordTextFieldVisibility,
                                             decoration: InputDecoration(
@@ -689,7 +902,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                               labelText: 'Password',
                                               labelStyle: FlutterFlowTheme.of(
                                                       context)
-                                                  .titleLarge
+                                                  .titleMedium
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: FlutterFlowTheme.of(
@@ -762,11 +975,11 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .titleLarge
+                                                .titleMedium
                                                 .override(
                                                   fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.normal,
                                                   lineHeight: 2.0,
                                                 ),
                                             textAlign: TextAlign.start,
@@ -776,12 +989,16 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             validator: _model
                                                 .suPasswordTextFieldTextControllerValidator
                                                 .asValidator(context),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp('[a-zA-Z0-9]'))
+                                            ],
                                           ),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 32.0, 0.0, 0.0),
+                                            16.0, 32.0, 16.0, 0.0),
                                         child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -792,14 +1009,16 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             focusNode: _model
                                                 .suConfirmPasswordTextFieldFocusNode,
                                             autofocus: false,
+                                            textInputAction:
+                                                TextInputAction.done,
                                             obscureText: !_model
                                                 .suConfirmPasswordTextFieldVisibility,
                                             decoration: InputDecoration(
                                               isDense: true,
-                                              labelText: ' Confirm Password',
+                                              labelText: 'Confirm Password',
                                               labelStyle: FlutterFlowTheme.of(
                                                       context)
-                                                  .titleLarge
+                                                  .titleMedium
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     color: FlutterFlowTheme.of(
@@ -872,11 +1091,11 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .titleLarge
+                                                .titleMedium
                                                 .override(
                                                   fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.normal,
                                                   lineHeight: 2.0,
                                                 ),
                                             textAlign: TextAlign.start,
@@ -886,6 +1105,10 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             validator: _model
                                                 .suConfirmPasswordTextFieldTextControllerValidator
                                                 .asValidator(context),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp('[a-zA-Z0-9]'))
+                                            ],
                                           ),
                                         ),
                                       ),
@@ -934,6 +1157,9 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                                       .suUsernameTextFieldTextController
                                                       .text,
                                                 ));
+
+                                            await authManager
+                                                .sendEmailVerification();
 
                                             context.goNamedAuth(
                                                 'Feed', context.mounted);
@@ -992,7 +1218,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: Image.network(
-                          'https://images.unsplash.com/photo-1500964757637-c85e8a162699?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwzfHxsYW5kc2NhcGV8ZW58MHx8fHwxNzMwNzg1MzA5fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                          'https://images.unsplash.com/photo-1607706189992-eae578626c86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw0fHxjb2Rpbmd8ZW58MHx8fHwxNzMxMTIzNTQ3fDA&ixlib=rb-4.0.3&q=85',
                         ).image,
                       ),
                       borderRadius: BorderRadius.circular(0.0),

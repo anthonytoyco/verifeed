@@ -88,17 +88,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const AuthsWidget(),
         ),
         FFRoute(
+          name: 'Profile',
+          path: '/profile',
+          requireAuth: true,
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'Profile')
+              : const ProfileWidget(),
+        ),
+        FFRoute(
           name: 'Feed',
           path: '/feed',
+          requireAuth: true,
           builder: (context, params) =>
               params.isEmpty ? const NavBarPage(initialPage: 'Feed') : const FeedWidget(),
         ),
         FFRoute(
-          name: 'Profile',
-          path: '/profile',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Profile')
-              : const ProfileWidget(),
+          name: 'test',
+          path: '/test',
+          requireAuth: true,
+          builder: (context, params) => const TestWidget(),
+        ),
+        FFRoute(
+          name: 'test2',
+          path: '/test2',
+          requireAuth: true,
+          builder: (context, params) => const Test2Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

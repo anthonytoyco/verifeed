@@ -25,11 +25,6 @@ class UsersRecord extends FirestoreRecord {
   String get displayName => _displayName ?? '';
   bool hasDisplayName() => _displayName != null;
 
-  // "created_time" field.
-  DateTime? _createdTime;
-  DateTime? get createdTime => _createdTime;
-  bool hasCreatedTime() => _createdTime != null;
-
   // "photo_url" field.
   String? _photoUrl;
   String get photoUrl => _photoUrl ?? '';
@@ -40,22 +35,33 @@ class UsersRecord extends FirestoreRecord {
   String get uid => _uid ?? '';
   bool hasUid() => _uid != null;
 
+  // "created_time" field.
+  DateTime? _createdTime;
+  DateTime? get createdTime => _createdTime;
+  bool hasCreatedTime() => _createdTime != null;
+
   // "phone_number" field.
   String? _phoneNumber;
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
+  // "admin_status" field.
+  bool? _adminStatus;
+  bool get adminStatus => _adminStatus ?? false;
+  bool hasAdminStatus() => _adminStatus != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
-    _createdTime = snapshotData['created_time'] as DateTime?;
     _photoUrl = snapshotData['photo_url'] as String?;
     _uid = snapshotData['uid'] as String?;
+    _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
+    _adminStatus = snapshotData['admin_status'] as bool?;
   }
 
   static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('Users');
+      FirebaseFirestore.instance.collection('users');
 
   static Stream<UsersRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map((s) => UsersRecord.fromSnapshot(s));
@@ -90,19 +96,21 @@ class UsersRecord extends FirestoreRecord {
 Map<String, dynamic> createUsersRecordData({
   String? email,
   String? displayName,
-  DateTime? createdTime,
   String? photoUrl,
   String? uid,
+  DateTime? createdTime,
   String? phoneNumber,
+  bool? adminStatus,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'email': email,
       'display_name': displayName,
-      'created_time': createdTime,
       'photo_url': photoUrl,
       'uid': uid,
+      'created_time': createdTime,
       'phone_number': phoneNumber,
+      'admin_status': adminStatus,
     }.withoutNulls,
   );
 
@@ -116,20 +124,22 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
   bool equals(UsersRecord? e1, UsersRecord? e2) {
     return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
-        e1?.createdTime == e2?.createdTime &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
-        e1?.phoneNumber == e2?.phoneNumber;
+        e1?.createdTime == e2?.createdTime &&
+        e1?.phoneNumber == e2?.phoneNumber &&
+        e1?.adminStatus == e2?.adminStatus;
   }
 
   @override
   int hash(UsersRecord? e) => const ListEquality().hash([
         e?.email,
         e?.displayName,
-        e?.createdTime,
         e?.photoUrl,
         e?.uid,
-        e?.phoneNumber
+        e?.createdTime,
+        e?.phoneNumber,
+        e?.adminStatus
       ]);
 
   @override

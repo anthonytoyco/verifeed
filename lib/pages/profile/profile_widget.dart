@@ -48,7 +48,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   width: double.infinity,
                   height: double.infinity,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                 ),
               ),

@@ -37,12 +37,22 @@ class _FeedWidgetState extends State<FeedWidget> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: const SafeArea(
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        body: SafeArea(
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

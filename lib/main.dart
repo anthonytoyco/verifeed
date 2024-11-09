@@ -148,7 +148,7 @@ class _NavBarPageState extends State<NavBarPage> {
         }),
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         color: FlutterFlowTheme.of(context).secondaryText,
-        activeColor: FlutterFlowTheme.of(context).primary,
+        activeColor: FlutterFlowTheme.of(context).primaryBackground,
         tabBackgroundColor: const Color(0x00000000),
         tabBorderRadius: 100.0,
         tabMargin: const EdgeInsets.all(10.0),
@@ -157,16 +157,38 @@ class _NavBarPageState extends State<NavBarPage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         duration: const Duration(milliseconds: 500),
         haptic: false,
-        tabs: const [
+        tabs: [
           GButton(
-            icon: Icons.home,
+            icon: Icons.grid_view_rounded,
             text: 'Feed',
             iconSize: 24.0,
+            backgroundGradient: currentIndex == 0
+                ? LinearGradient(
+                    colors: [
+                      FlutterFlowTheme.of(context).secondary,
+                      FlutterFlowTheme.of(context).tertiary
+                    ],
+                    stops: const [0.0, 1.0],
+                    begin: const AlignmentDirectional(0.0, -1.0),
+                    end: const AlignmentDirectional(0, 1.0),
+                  )
+                : null,
           ),
           GButton(
             icon: Icons.person,
             text: 'Profile',
             iconSize: 24.0,
+            backgroundGradient: currentIndex == 1
+                ? LinearGradient(
+                    colors: [
+                      FlutterFlowTheme.of(context).secondary,
+                      FlutterFlowTheme.of(context).tertiary
+                    ],
+                    stops: const [0.0, 1.0],
+                    begin: const AlignmentDirectional(0.0, -1.0),
+                    end: const AlignmentDirectional(0, 1.0),
+                  )
+                : null,
           )
         ],
       ),

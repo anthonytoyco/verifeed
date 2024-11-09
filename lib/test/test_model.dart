@@ -1,12 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'feed_widget.dart' show FeedWidget;
+import 'test_widget.dart' show TestWidget;
 import 'package:flutter/material.dart';
 
-class FeedModel extends FlutterFlowModel<FeedWidget> {
-  ///  Local state fields for this page.
-
-  bool isLoggedIn = false;
-
+class TestModel extends FlutterFlowModel<TestWidget> {
   @override
   void initState(BuildContext context) {}
 
