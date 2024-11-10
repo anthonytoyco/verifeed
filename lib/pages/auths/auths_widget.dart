@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'auths_model.dart';
@@ -75,7 +76,6 @@ class _AuthsWidgetState extends State<AuthsWidget>
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                flex: 3,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -118,7 +118,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 32.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
                       child: Container(
                         width: 100.0,
                         height: MediaQuery.sizeOf(context).height * 0.75,
@@ -430,7 +430,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             }
 
                                             context.goNamedAuth(
-                                                'Feed', context.mounted);
+                                                'Profile', context.mounted);
                                           },
                                           text: 'Log In',
                                           options: FFButtonOptions(
@@ -552,7 +552,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             }
 
                                             context.goNamedAuth(
-                                                'Feed', context.mounted);
+                                                'Profile', context.mounted);
                                           },
                                           text: 'Google',
                                           icon: const FaIcon(
@@ -601,9 +601,11 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             if (user == null) {
                                               return;
                                             }
+                                            FFAppState().isAnonymousUser = true;
+                                            safeSetState(() {});
 
                                             context.goNamedAuth(
-                                                'Feed', context.mounted);
+                                                'Profile', context.mounted);
                                           },
                                           text: 'Guest',
                                           icon: const Icon(
@@ -1115,80 +1117,169 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 32.0, 0.0, 0.0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            GoRouter.of(context)
-                                                .prepareAuthEvent();
-                                            if (_model
-                                                    .suPasswordTextFieldTextController
-                                                    .text !=
-                                                _model
-                                                    .suConfirmPasswordTextFieldTextController
-                                                    .text) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                const SnackBar(
-                                                  content: Text(
-                                                    'Passwords don\'t match!',
+                                        child: StreamBuilder<
+                                            List<UsernamesRecord>>(
+                                          stream: queryUsernamesRecord(
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child: SpinKitThreeBounce(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 50.0,
                                                   ),
                                                 ),
                                               );
-                                              return;
                                             }
-
-                                            final user = await authManager
-                                                .createAccountWithEmail(
-                                              context,
-                                              _model
-                                                  .suEmailTextFieldTextController
-                                                  .text,
-                                              _model
-                                                  .suPasswordTextFieldTextController
-                                                  .text,
-                                            );
-                                            if (user == null) {
-                                              return;
+                                            List<UsernamesRecord>
+                                                signUpButtonUsernamesRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
                                             }
+                                            final signUpButtonUsernamesRecord =
+                                                signUpButtonUsernamesRecordList
+                                                        .isNotEmpty
+                                                    ? signUpButtonUsernamesRecordList
+                                                        .first
+                                                    : null;
 
-                                            await UsersRecord.collection
-                                                .doc(user.uid)
-                                                .update(createUsersRecordData(
-                                                  displayName: _model
-                                                      .suUsernameTextFieldTextController
-                                                      .text,
-                                                ));
-
-                                            await authManager
-                                                .sendEmailVerification();
-
-                                            context.goNamedAuth(
-                                                'Feed', context.mounted);
-                                          },
-                                          text: 'Sign Up',
-                                          options: FFButtonOptions(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.5,
-                                            height: 50.0,
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 0.0, 16.0, 0.0),
-                                            iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleLarge
-                                                    .override(
-                                                      fontFamily: 'Inter',
-                                                      letterSpacing: 0.0,
+                                            return FFButtonWidget(
+                                              onPressed: () async {
+                                                Function() navigate = () {};
+                                                if (signUpButtonUsernamesRecord
+                                                        ?.usedUsernames
+                                                        .contains(_model
+                                                            .suUsernameTextFieldTextController
+                                                            .text) ==
+                                                    true) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Username is already in use!',
+                                                        style: TextStyle(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                      ),
+                                                      duration: const Duration(
+                                                          milliseconds: 4000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary,
                                                     ),
-                                            elevation: 0.0,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
+                                                  );
+                                                } else {
+                                                  GoRouter.of(context)
+                                                      .prepareAuthEvent();
+                                                  if (_model
+                                                          .suPasswordTextFieldTextController
+                                                          .text !=
+                                                      _model
+                                                          .suConfirmPasswordTextFieldTextController
+                                                          .text) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                          'Passwords don\'t match!',
+                                                        ),
+                                                      ),
+                                                    );
+                                                    return;
+                                                  }
+
+                                                  final user = await authManager
+                                                      .createAccountWithEmail(
+                                                    context,
+                                                    _model
+                                                        .suEmailTextFieldTextController
+                                                        .text,
+                                                    _model
+                                                        .suPasswordTextFieldTextController
+                                                        .text,
+                                                  );
+                                                  if (user == null) {
+                                                    return;
+                                                  }
+
+                                                  await UsersRecord.collection
+                                                      .doc(user.uid)
+                                                      .update(
+                                                          createUsersRecordData(
+                                                        username: _model
+                                                            .suUsernameTextFieldTextController
+                                                            .text,
+                                                      ));
+
+                                                  navigate = () =>
+                                                      context.goNamedAuth(
+                                                          'Profile',
+                                                          context.mounted);
+
+                                                  await signUpButtonUsernamesRecord!
+                                                      .reference
+                                                      .update({
+                                                    ...mapToFirestore(
+                                                      {
+                                                        'used_usernames':
+                                                            FieldValue
+                                                                .arrayUnion([
+                                                          _model
+                                                              .suUsernameTextFieldTextController
+                                                              .text
+                                                        ]),
+                                                      },
+                                                    ),
+                                                  });
+                                                  await authManager
+                                                      .sendEmailVerification();
+                                                }
+
+                                                navigate();
+                                              },
+                                              text: 'Create Account',
+                                              options: FFButtonOptions(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        0.5,
+                                                height: 50.0,
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        16.0, 0.0, 16.0, 0.0),
+                                                iconPadding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                elevation: 0.0,
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
                                     ],

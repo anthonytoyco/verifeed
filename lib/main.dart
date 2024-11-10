@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,7 +22,13 @@ void main() async {
 
   await FlutterFlowTheme.initialize();
 
-  runApp(const MyApp());
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -120,7 +127,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'Feed';
+  String _currentPageName = 'Profile';
   late Widget? _currentPage;
 
   @override
@@ -181,7 +188,7 @@ class _NavBarPageState extends State<NavBarPage> {
             backgroundGradient: currentIndex == 1
                 ? LinearGradient(
                     colors: [
-                      FlutterFlowTheme.of(context).secondary,
+                      FlutterFlowTheme.of(context).primary,
                       FlutterFlowTheme.of(context).tertiary
                     ],
                     stops: const [0.0, 1.0],

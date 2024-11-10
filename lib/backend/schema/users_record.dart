@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -50,6 +51,26 @@ class UsersRecord extends FirestoreRecord {
   bool get adminStatus => _adminStatus ?? false;
   bool hasAdminStatus() => _adminStatus != null;
 
+  // "followers" field.
+  List<String>? _followers;
+  List<String> get followers => _followers ?? const [];
+  bool hasFollowers() => _followers != null;
+
+  // "following" field.
+  List<String>? _following;
+  List<String> get following => _following ?? const [];
+  bool hasFollowing() => _following != null;
+
+  // "bio" field.
+  String? _bio;
+  String get bio => _bio ?? '';
+  bool hasBio() => _bio != null;
+
+  // "username" field.
+  String? _username;
+  String get username => _username ?? '';
+  bool hasUsername() => _username != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -58,6 +79,10 @@ class UsersRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _adminStatus = snapshotData['admin_status'] as bool?;
+    _followers = getDataList(snapshotData['followers']);
+    _following = getDataList(snapshotData['following']);
+    _bio = snapshotData['bio'] as String?;
+    _username = snapshotData['username'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -101,6 +126,8 @@ Map<String, dynamic> createUsersRecordData({
   DateTime? createdTime,
   String? phoneNumber,
   bool? adminStatus,
+  String? bio,
+  String? username,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -111,6 +138,8 @@ Map<String, dynamic> createUsersRecordData({
       'created_time': createdTime,
       'phone_number': phoneNumber,
       'admin_status': adminStatus,
+      'bio': bio,
+      'username': username,
     }.withoutNulls,
   );
 
@@ -122,13 +151,18 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
 
   @override
   bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.adminStatus == e2?.adminStatus;
+        e1?.adminStatus == e2?.adminStatus &&
+        listEquality.equals(e1?.followers, e2?.followers) &&
+        listEquality.equals(e1?.following, e2?.following) &&
+        e1?.bio == e2?.bio &&
+        e1?.username == e2?.username;
   }
 
   @override
@@ -139,7 +173,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.adminStatus
+        e?.adminStatus,
+        e?.followers,
+        e?.following,
+        e?.bio,
+        e?.username
       ]);
 
   @override

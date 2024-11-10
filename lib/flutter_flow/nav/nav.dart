@@ -103,12 +103,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               params.isEmpty ? const NavBarPage(initialPage: 'Feed') : const FeedWidget(),
         ),
         FFRoute(
-          name: 'test',
-          path: '/test',
-          requireAuth: true,
-          builder: (context, params) => const TestWidget(),
-        ),
-        FFRoute(
           name: 'test2',
           path: '/test2',
           requireAuth: true,
