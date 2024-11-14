@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 class AuthsModel extends FlutterFlowModel<AuthsWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
+  // State field(s) for AuthTabBar widget.
+  TabController? authTabBarController;
+  int get authTabBarCurrentIndex =>
+      authTabBarController != null ? authTabBarController!.index : 0;
 
   // State field(s) for liEmailTextField widget.
   FocusNode? liEmailTextFieldFocusNode;
@@ -53,7 +53,7 @@ class AuthsModel extends FlutterFlowModel<AuthsWidget> {
 
   @override
   void dispose() {
-    tabBarController?.dispose();
+    authTabBarController?.dispose();
     liEmailTextFieldFocusNode?.dispose();
     liEmailTextFieldTextController?.dispose();
 

@@ -5,8 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'auths_model.dart';
@@ -30,7 +28,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
     super.initState();
     _model = createModel(context, () => AuthsModel());
 
-    _model.tabBarController = TabController(
+    _model.authTabBarController = TabController(
       vsync: this,
       length: 2,
       initialIndex: 0,
@@ -70,65 +68,50 @@ class _AuthsWidgetState extends State<AuthsWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
+        body: Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Align(
-                        alignment: const AlignmentDirectional(0.0, 1.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 100.0,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 7.0, 0.0),
-                            child: GradientText(
-                              'VeriFeed',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .displayLarge
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                              colors: [
-                                FlutterFlowTheme.of(context).primary,
-                                FlutterFlowTheme.of(context).secondary,
-                                FlutterFlowTheme.of(context).tertiary
-                              ],
-                              gradientDirection: GradientDirection.ltr,
-                              gradientType: GradientType.linear,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
                       child: Container(
-                        width: 100.0,
-                        height: MediaQuery.sizeOf(context).height * 0.75,
-                        constraints: const BoxConstraints(
-                          minWidth: 800.0,
-                          maxWidth: 800.0,
-                        ),
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: 90.0,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                         ),
+                        child: GradientText(
+                          'VeriFeed',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .displayLarge
+                              .override(
+                                fontFamily: 'Inter',
+                                letterSpacing: 0.0,
+                                fontStyle: FontStyle.italic,
+                              ),
+                          colors: [
+                            FlutterFlowTheme.of(context).primary,
+                            FlutterFlowTheme.of(context).secondary,
+                            FlutterFlowTheme.of(context).tertiary
+                          ],
+                          gradientDirection: GradientDirection.ltr,
+                          gradientType: GradientType.linear,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: const AlignmentDirectional(0.0, 1.0),
                         child: Column(
                           children: [
                             Align(
@@ -162,7 +145,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                     text: 'Sign Up',
                                   ),
                                 ],
-                                controller: _model.tabBarController,
+                                controller: _model.authTabBarController,
                                 onTap: (i) async {
                                   [() async {}, () async {}][i]();
                                 },
@@ -170,7 +153,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                             ),
                             Expanded(
                               child: TabBarView(
-                                controller: _model.tabBarController,
+                                controller: _model.authTabBarController,
                                 children: [
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -400,10 +383,6 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             validator: _model
                                                 .liPasswordTextFieldTextControllerValidator
                                                 .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('[a-zA-Z0-9]'))
-                                            ],
                                           ),
                                         ),
                                       ),
@@ -430,7 +409,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             }
 
                                             context.goNamedAuth(
-                                                'Profile', context.mounted);
+                                                'Feed', context.mounted);
                                           },
                                           text: 'Log In',
                                           options: FFButtonOptions(
@@ -510,32 +489,15 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                           ),
                                         ),
                                       ),
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  50.0, 0.0, 50.0, 0.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Opacity(
-                                                opacity: 0.5,
-                                                child: Divider(
-                                                  height: 64.0,
-                                                  thickness: 2.0,
-                                                  indent: 50.0,
-                                                  endIndent: 50.0,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                      Opacity(
+                                        opacity: 0.5,
+                                        child: Divider(
+                                          height: 32.0,
+                                          thickness: 1.0,
+                                          indent: 50.0,
+                                          endIndent: 50.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
                                         ),
                                       ),
                                       Padding(
@@ -552,7 +514,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             }
 
                                             context.goNamedAuth(
-                                                'Profile', context.mounted);
+                                                'Feed', context.mounted);
                                           },
                                           text: 'Google',
                                           icon: const FaIcon(
@@ -601,11 +563,9 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             if (user == null) {
                                               return;
                                             }
-                                            FFAppState().isAnonymousUser = true;
-                                            safeSetState(() {});
 
                                             context.goNamedAuth(
-                                                'Profile', context.mounted);
+                                                'Feed', context.mounted);
                                           },
                                           text: 'Guest',
                                           icon: const Icon(
@@ -875,10 +835,6 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             validator: _model
                                                 .suUsernameTextFieldTextControllerValidator
                                                 .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('[a-zA-Z0-9]'))
-                                            ],
                                           ),
                                         ),
                                       ),
@@ -991,10 +947,6 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             validator: _model
                                                 .suPasswordTextFieldTextControllerValidator
                                                 .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('[a-zA-Z0-9]'))
-                                            ],
                                           ),
                                         ),
                                       ),
@@ -1107,10 +1059,6 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                             validator: _model
                                                 .suConfirmPasswordTextFieldTextControllerValidator
                                                 .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('[a-zA-Z0-9]'))
-                                            ],
                                           ),
                                         ),
                                       ),
@@ -1129,11 +1077,15 @@ class _AuthsWidgetState extends State<AuthsWidget>
                                                 child: SizedBox(
                                                   width: 50.0,
                                                   height: 50.0,
-                                                  child: SpinKitThreeBounce(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    size: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                    ),
                                                   ),
                                                 ),
                                               );
@@ -1226,7 +1178,7 @@ class _AuthsWidgetState extends State<AuthsWidget>
 
                                                   navigate = () =>
                                                       context.goNamedAuth(
-                                                          'Profile',
+                                                          'Feed',
                                                           context.mounted);
 
                                                   await signUpButtonUsernamesRecord!
@@ -1294,30 +1246,30 @@ class _AuthsWidgetState extends State<AuthsWidget>
                   ],
                 ),
               ),
-              if (responsiveVisibility(
-                context: context,
-                phone: false,
-                tablet: false,
-              ))
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    width: 100.0,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: Image.network(
-                          'https://images.unsplash.com/photo-1607706189992-eae578626c86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw0fHxjb2Rpbmd8ZW58MHx8fHwxNzMxMTIzNTQ3fDA&ixlib=rb-4.0.3&q=85',
-                        ).image,
-                      ),
-                      borderRadius: BorderRadius.circular(0.0),
+            ),
+            if (responsiveVisibility(
+              context: context,
+              phone: false,
+              tablet: false,
+            ))
+              Expanded(
+                flex: 2,
+                child: Container(
+                  width: 100.0,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: Image.network(
+                        'https://images.unsplash.com/photo-1607706189992-eae578626c86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw0fHxjb2Rpbmd8ZW58MHx8fHwxNzMxMTIzNTQ3fDA&ixlib=rb-4.0.3&q=85',
+                      ).image,
                     ),
+                    borderRadius: BorderRadius.circular(0.0),
                   ),
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );

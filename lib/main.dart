@@ -1,4 +1,3 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -22,13 +21,7 @@ void main() async {
 
   await FlutterFlowTheme.initialize();
 
-  final appState = FFAppState(); // Initialize FFAppState
-  await appState.initializePersistedState();
-
-  runApp(ChangeNotifierProvider(
-    create: (context) => appState,
-    child: const MyApp(),
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -127,7 +120,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'Profile';
+  String _currentPageName = 'Feed';
   late Widget? _currentPage;
 
   @override
@@ -141,6 +134,9 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Feed': const FeedWidget(),
+      'Search': const SearchWidget(),
+      'Post': const PostWidget(),
+      'Saved': const SavedWidget(),
       'Profile': const ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -153,15 +149,15 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         color: FlutterFlowTheme.of(context).secondaryText,
         activeColor: FlutterFlowTheme.of(context).primaryBackground,
         tabBackgroundColor: const Color(0x00000000),
-        tabBorderRadius: 100.0,
-        tabMargin: const EdgeInsets.all(10.0),
+        tabBorderRadius: 16.0,
+        tabMargin: const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 24.0),
         padding: const EdgeInsets.all(4.0),
         gap: 0.0,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         duration: const Duration(milliseconds: 500),
         haptic: false,
         tabs: [
@@ -182,13 +178,61 @@ class _NavBarPageState extends State<NavBarPage> {
                 : null,
           ),
           GButton(
-            icon: Icons.person,
-            text: 'Profile',
+            icon: Icons.search,
+            text: 'Search',
             iconSize: 24.0,
             backgroundGradient: currentIndex == 1
                 ? LinearGradient(
                     colors: [
-                      FlutterFlowTheme.of(context).primary,
+                      FlutterFlowTheme.of(context).secondary,
+                      FlutterFlowTheme.of(context).tertiary
+                    ],
+                    stops: const [0.0, 1.0],
+                    begin: const AlignmentDirectional(0.0, -1.0),
+                    end: const AlignmentDirectional(0, 1.0),
+                  )
+                : null,
+          ),
+          GButton(
+            icon: Icons.file_upload,
+            text: 'Post',
+            iconSize: 24.0,
+            backgroundGradient: currentIndex == 2
+                ? LinearGradient(
+                    colors: [
+                      FlutterFlowTheme.of(context).secondary,
+                      FlutterFlowTheme.of(context).tertiary
+                    ],
+                    stops: const [0.0, 1.0],
+                    begin: const AlignmentDirectional(0.0, -1.0),
+                    end: const AlignmentDirectional(0, 1.0),
+                  )
+                : null,
+          ),
+          GButton(
+            icon: Icons.folder,
+            text: 'Saved',
+            iconSize: 24.0,
+            backgroundGradient: currentIndex == 3
+                ? LinearGradient(
+                    colors: [
+                      FlutterFlowTheme.of(context).secondary,
+                      FlutterFlowTheme.of(context).tertiary
+                    ],
+                    stops: const [0.0, 1.0],
+                    begin: const AlignmentDirectional(0.0, -1.0),
+                    end: const AlignmentDirectional(0, 1.0),
+                  )
+                : null,
+          ),
+          GButton(
+            icon: Icons.person,
+            text: 'Profile',
+            iconSize: 24.0,
+            backgroundGradient: currentIndex == 4
+                ? LinearGradient(
+                    colors: [
+                      FlutterFlowTheme.of(context).secondary,
                       FlutterFlowTheme.of(context).tertiary
                     ],
                     stops: const [0.0, 1.0],

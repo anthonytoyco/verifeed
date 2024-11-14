@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '/auth/base_auth_user_provider.dart';
@@ -103,10 +102,48 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               params.isEmpty ? const NavBarPage(initialPage: 'Feed') : const FeedWidget(),
         ),
         FFRoute(
-          name: 'test2',
-          path: '/test2',
+          name: 'Post',
+          path: '/post',
           requireAuth: true,
-          builder: (context, params) => const Test2Widget(),
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'Post') : const PostWidget(),
+        ),
+        FFRoute(
+          name: 'Search',
+          path: '/search',
+          requireAuth: true,
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'Search')
+              : const SearchWidget(),
+        ),
+        FFRoute(
+          name: 'Saved',
+          path: '/saved',
+          requireAuth: true,
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'Saved') : const SavedWidget(),
+        ),
+        FFRoute(
+          name: 'InitProfile',
+          path: '/initProfile',
+          requireAuth: true,
+          builder: (context, params) => const InitProfileWidget(),
+        ),
+        FFRoute(
+          name: 'ViewPost',
+          path: '/viewPost',
+          requireAuth: true,
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: ViewPostWidget(
+              postID: params.getParam(
+                'postID',
+                ParamType.DocumentReference,
+                isList: false,
+                collectionNamePath: ['posts'],
+              ),
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -295,9 +332,10 @@ class FFRoute {
                   child: SizedBox(
                     width: 50.0,
                     height: 50.0,
-                    child: SpinKitThreeBounce(
-                      color: FlutterFlowTheme.of(context).primary,
-                      size: 50.0,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
+                      ),
                     ),
                   ),
                 )

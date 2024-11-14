@@ -21,50 +21,62 @@ class PostsRecord extends FirestoreRecord {
   String get postPhoto => _postPhoto ?? '';
   bool hasPostPhoto() => _postPhoto != null;
 
-  // "post_title" field.
-  String? _postTitle;
-  String get postTitle => _postTitle ?? '';
-  bool hasPostTitle() => _postTitle != null;
-
-  // "post_description" field.
-  String? _postDescription;
-  String get postDescription => _postDescription ?? '';
-  bool hasPostDescription() => _postDescription != null;
-
-  // "post_user" field.
-  DocumentReference? _postUser;
-  DocumentReference? get postUser => _postUser;
-  bool hasPostUser() => _postUser != null;
-
   // "time_posted" field.
   DateTime? _timePosted;
   DateTime? get timePosted => _timePosted;
   bool hasTimePosted() => _timePosted != null;
 
-  // "likes" field.
-  List<DocumentReference>? _likes;
-  List<DocumentReference> get likes => _likes ?? const [];
-  bool hasLikes() => _likes != null;
+  // "post_text" field.
+  String? _postText;
+  String get postText => _postText ?? '';
+  bool hasPostText() => _postText != null;
 
-  // "num_comments" field.
-  int? _numComments;
-  int get numComments => _numComments ?? 0;
-  bool hasNumComments() => _numComments != null;
+  // "post_title" field.
+  String? _postTitle;
+  String get postTitle => _postTitle ?? '';
+  bool hasPostTitle() => _postTitle != null;
 
-  // "num_votes" field.
-  int? _numVotes;
-  int get numVotes => _numVotes ?? 0;
-  bool hasNumVotes() => _numVotes != null;
+  // "poster" field.
+  DocumentReference? _poster;
+  DocumentReference? get poster => _poster;
+  bool hasPoster() => _poster != null;
+
+  // "poster_username" field.
+  String? _posterUsername;
+  String get posterUsername => _posterUsername ?? '';
+  bool hasPosterUsername() => _posterUsername != null;
+
+  // "poster_display_name" field.
+  String? _posterDisplayName;
+  String get posterDisplayName => _posterDisplayName ?? '';
+  bool hasPosterDisplayName() => _posterDisplayName != null;
+
+  // "poster_avatar" field.
+  String? _posterAvatar;
+  String get posterAvatar => _posterAvatar ?? '';
+  bool hasPosterAvatar() => _posterAvatar != null;
+
+  // "post_voters" field.
+  List<DocumentReference>? _postVoters;
+  List<DocumentReference> get postVoters => _postVoters ?? const [];
+  bool hasPostVoters() => _postVoters != null;
+
+  // "post_sources" field.
+  String? _postSources;
+  String get postSources => _postSources ?? '';
+  bool hasPostSources() => _postSources != null;
 
   void _initializeFields() {
     _postPhoto = snapshotData['post_photo'] as String?;
-    _postTitle = snapshotData['post_title'] as String?;
-    _postDescription = snapshotData['post_description'] as String?;
-    _postUser = snapshotData['post_user'] as DocumentReference?;
     _timePosted = snapshotData['time_posted'] as DateTime?;
-    _likes = getDataList(snapshotData['likes']);
-    _numComments = castToType<int>(snapshotData['num_comments']);
-    _numVotes = castToType<int>(snapshotData['num_votes']);
+    _postText = snapshotData['post_text'] as String?;
+    _postTitle = snapshotData['post_title'] as String?;
+    _poster = snapshotData['poster'] as DocumentReference?;
+    _posterUsername = snapshotData['poster_username'] as String?;
+    _posterDisplayName = snapshotData['poster_display_name'] as String?;
+    _posterAvatar = snapshotData['poster_avatar'] as String?;
+    _postVoters = getDataList(snapshotData['post_voters']);
+    _postSources = snapshotData['post_sources'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -102,22 +114,26 @@ class PostsRecord extends FirestoreRecord {
 
 Map<String, dynamic> createPostsRecordData({
   String? postPhoto,
-  String? postTitle,
-  String? postDescription,
-  DocumentReference? postUser,
   DateTime? timePosted,
-  int? numComments,
-  int? numVotes,
+  String? postText,
+  String? postTitle,
+  DocumentReference? poster,
+  String? posterUsername,
+  String? posterDisplayName,
+  String? posterAvatar,
+  String? postSources,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'post_photo': postPhoto,
-      'post_title': postTitle,
-      'post_description': postDescription,
-      'post_user': postUser,
       'time_posted': timePosted,
-      'num_comments': numComments,
-      'num_votes': numVotes,
+      'post_text': postText,
+      'post_title': postTitle,
+      'poster': poster,
+      'poster_username': posterUsername,
+      'poster_display_name': posterDisplayName,
+      'poster_avatar': posterAvatar,
+      'post_sources': postSources,
     }.withoutNulls,
   );
 
@@ -131,25 +147,29 @@ class PostsRecordDocumentEquality implements Equality<PostsRecord> {
   bool equals(PostsRecord? e1, PostsRecord? e2) {
     const listEquality = ListEquality();
     return e1?.postPhoto == e2?.postPhoto &&
-        e1?.postTitle == e2?.postTitle &&
-        e1?.postDescription == e2?.postDescription &&
-        e1?.postUser == e2?.postUser &&
         e1?.timePosted == e2?.timePosted &&
-        listEquality.equals(e1?.likes, e2?.likes) &&
-        e1?.numComments == e2?.numComments &&
-        e1?.numVotes == e2?.numVotes;
+        e1?.postText == e2?.postText &&
+        e1?.postTitle == e2?.postTitle &&
+        e1?.poster == e2?.poster &&
+        e1?.posterUsername == e2?.posterUsername &&
+        e1?.posterDisplayName == e2?.posterDisplayName &&
+        e1?.posterAvatar == e2?.posterAvatar &&
+        listEquality.equals(e1?.postVoters, e2?.postVoters) &&
+        e1?.postSources == e2?.postSources;
   }
 
   @override
   int hash(PostsRecord? e) => const ListEquality().hash([
         e?.postPhoto,
-        e?.postTitle,
-        e?.postDescription,
-        e?.postUser,
         e?.timePosted,
-        e?.likes,
-        e?.numComments,
-        e?.numVotes
+        e?.postText,
+        e?.postTitle,
+        e?.poster,
+        e?.posterUsername,
+        e?.posterDisplayName,
+        e?.posterAvatar,
+        e?.postVoters,
+        e?.postSources
       ]);
 
   @override

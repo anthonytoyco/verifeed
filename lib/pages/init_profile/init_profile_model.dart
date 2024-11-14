@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'profile_widget.dart' show ProfileWidget;
+import 'init_profile_widget.dart' show InitProfileWidget;
 import 'package:flutter/material.dart';
 
-class ProfileModel extends FlutterFlowModel<ProfileWidget> {
+class InitProfileModel extends FlutterFlowModel<InitProfileWidget> {
   @override
   void initState(BuildContext context) {}
 

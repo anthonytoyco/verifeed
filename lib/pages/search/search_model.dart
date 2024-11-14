@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'profile_widget.dart' show ProfileWidget;
+import 'search_widget.dart' show SearchWidget;
 import 'package:flutter/material.dart';
 
-class ProfileModel extends FlutterFlowModel<ProfileWidget> {
+class SearchModel extends FlutterFlowModel<SearchWidget> {
   @override
   void initState(BuildContext context) {}
 
